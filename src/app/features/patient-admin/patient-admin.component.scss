@@ -1,0 +1,70 @@
+:host ::ng-deep {
+    .bg-light-subtle {
+        background-color: #f9fafb !important;
+      }
+    
+      /* Transition for the detail row */
+      tr.bg-light-subtle td {
+        animation: fadeIn 0.2s ease-in-out;
+      }
+    
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    
+      /* Ensure clicking the row feels interactive */
+      tbody tr:not(.bg-light-subtle) td:nth-child(2):hover {
+        color: #0d6efd;
+        text-decoration: underline;
+      }
+    /* Position and style the Excel Button */
+    .dt-buttons {
+      margin-bottom: 0 !important;
+      .btn-success {
+        background-color: #198754;
+        border-color: #198754;
+        font-size: 0.85rem;
+        &:hover {
+          background-color: #157347;
+        }
+      }
+    }
+  
+    /* Style the Search Input */
+    .dataTables_filter {
+      input {
+        border: 1px solid #dee2e6;
+        border-radius: 20px;
+        padding: 6px 16px;
+        width: 260px;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+        
+        &:focus {
+          outline: none;
+          border-color: #0d6efd;
+          box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+        }
+      }
+    }
+  
+    /* Adjust pagination and info text */
+    .dataTables_info, .dataTables_paginate {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: #6c757d;
+    }
+  }
+  .dropdown-item {
+    font-size: 0.875rem;
+    transition: background 0.2s;
+    &:hover {
+      background-color: #f8f9fa;
+    }
+  }
+  
+  .btn-link:hover {
+    background-color: #e9ecef;
+    border-radius: 50%;
+  }

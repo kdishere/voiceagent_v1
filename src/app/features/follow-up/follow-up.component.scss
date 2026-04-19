@@ -1,0 +1,105 @@
+/* Layout and Spacing */
+.container-fluid {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  /* Clinical History Timeline Styles */
+  .list-group-item {
+    transition: all 0.2s ease-in-out;
+    border-left-width: 5px !important; // Thick indicator strip for clinical status
+    border-bottom: 1px solid #edf2f7;
+    
+    &:hover {
+      background-color: #f1f5f9;
+      transform: translateX(4px);
+    }
+  
+    /* Status-based color coding for the indicator strip */
+    &.border-danger { border-left-color: #dc3545 !important; }   // Critical
+    &.border-warning { border-left-color: #ffc107 !important; }  // Warning/High Risk
+    &.border-success { border-left-color: #198754 !important; }  // Healthy/Recovered
+    &.border-primary { border-left-color: #0d6efd !important; }  // Stable
+  }
+  
+  /* Custom Scrollbar for the History Panel */
+  .overflow-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e0 transparent;
+  
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background: #cbd5e0;
+      border-radius: 10px;
+    }
+  }
+  
+  /* Sticky Form Behavior */
+  .sticky-top {
+    z-index: 10;
+    // Ensures the form stays in view while reviewing long histories
+    @media (min-width: 992px) {
+      top: 2rem;
+    }
+  }
+  
+  /* Form Styling Enhancements */
+  .card {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .card-header {
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  
+  .form-label {
+    color: #4a5568;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-control, .form-select {
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+    
+    &:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+    }
+  }
+  
+  /* Risk Score Slider Customization */
+  .form-range {
+    height: 1.5rem;
+    
+    &:focus::-webkit-slider-thumb {
+      box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+  }
+  
+  .badge {
+    font-weight: 500;
+    padding: 0.4em 0.8em;
+  }
+  
+  /* Breadcrumb Styling */
+  .breadcrumb-item {
+    font-size: 0.9rem;
+    a {
+      text-decoration: none;
+      color: #6c757d;
+      &:hover {
+        color: #0d6efd;
+      }
+    }
+  }

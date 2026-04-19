@@ -1,0 +1,91 @@
+<div class="container-fluid py-4">
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table #patientTable class="table table-hover align-middle mb-0 w-100">
+          <thead class="table-light">
+            <tr>
+              <th class="ps-4" style="width: 40px;"><input type="checkbox" class="form-check-input" id="selectAll" (change)="toggleAll($event)"></th>
+              <th>Patient Name</th>
+              <th>Status</th>
+              <th>Risk Score</th>
+              <th class="text-end pe-4">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of patientService.patients(); track p.id) {
+              <tr>
+                <td class="ps-4"><input type="checkbox" class="form-check-input"></td>
+                <td (click)="p.expanded = !p.expanded" style="cursor: pointer;">
+                  <div class="fw-bold">{{p.name}}</div>
+                  <div class="small text-muted">{{p.id}}</div>
+                </td>
+                <td>
+                  <span class="badge rounded-pill" [ngClass]="p.status === 'Critical' ? 'bg-danger-subtle text-danger' : 'bg-success-subtle text-success'">
+                    {{p.status}}
+                  </span>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center gap-2">
+                    <div class="progress flex-grow-1" style="height: 6px; min-width: 80px;">
+                      <div class="progress-bar" [style.width.%]="p.riskScore" 
+                           [ngClass]="p.riskScore > 70 ? 'bg-danger' : (p.riskScore > 40 ? 'bg-warning' : 'bg-success')"></div>
+                    </div>
+                    <span class="small fw-bold">{{p.riskScore}}%</span>
+                  </div>
+                </td>
+                <td class="text-end pe-4">
+                  <div class="d-flex justify-content-end align-items-center gap-2">
+                    <button class="btn btn-link text-muted p-0" (click)="p.expanded = !p.expanded" title="View Details">
+                      <i class="bi" [ngClass]="p.expanded ? 'bi-dash-circle' : 'bi-three-dots'"></i>
+                    </button>
+                    
+                    <div class="dropdown">
+                      <button class="btn btn-link text-muted p-0" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-gear fs-6"></i>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                        <li><a class="dropdown-item py-2" [routerLink]="['/follow-up', p.id]"><i class="bi bi-telephone-outbound me-2 text-primary"></i>Follow-up</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item py-2 text-danger" href="#"><i class="bi bi-trash me-2"></i>Delete Record</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              @if (p.expanded) {
+                <tr class="bg-light-subtle">
+                  <td colspan="5" class="ps-5 py-3 border-start border-4 border-primary">
+                    <div class="row g-3">
+                      <div class="col-md-3">
+                        <small class="text-muted d-block text-uppercase fw-bold" style="font-size: 0.65rem;">Clinical Context</small>
+                        <div class="small"><strong>Surgery:</strong> {{p.surgery_type || 'N/A'}}</div>
+                        <div class="small"><strong>Days Post-Op:</strong> {{p.days_since_surgery || 0}}</div>
+                      </div>
+                      <div class="col-md-3">
+                        <small class="text-muted d-block text-uppercase fw-bold" style="font-size: 0.65rem;">Admission Data</small>
+                        <div class="small"><strong>Baseline Risk:</strong> {{p.baseline_risk}}</div>
+                        <div class="small"><strong>30-Day Readmit:</strong> {{p.prior_30_day_admission || 'No'}}</div>
+                      </div>
+                      <div class="col-md-3">
+                        <small class="text-muted d-block text-uppercase fw-bold" style="font-size: 0.65rem;">Administrative</small>
+                        <div class="small"><strong>Language:</strong> {{p.language}}</div>
+                        <div class="small"><strong>Attempts:</strong> {{p.call_attempts}} / {{p.max_attempts}}</div>
+                      </div>
+                      <div class="col-md-3 text-end pe-4">
+                        <small class="text-muted d-block text-uppercase fw-bold" style="font-size: 0.65rem;">Location</small>
+                        <div class="small">{{p.timezone}}</div>
+                        <div class="small text-primary fw-bold">{{p.phone_number}}</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
